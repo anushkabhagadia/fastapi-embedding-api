@@ -2,3 +2,7 @@ fastapi
 uvicorn
 pydantic
 spacy
+torch
+torchvision
+pillow
+python-multipart

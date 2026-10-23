@@ -1,7 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import spacy
-from cnn_router import router as cnn_router   # <-- ADD (line 4)
+from cnn_router import router as cnn_router
+from gan_router import router as gan_router   # <-- NEW
 
 # Load the spaCy model
 # Note: You must run 'python -m spacy download en_core_web_md' before running this locally
@@ -11,7 +12,8 @@ except OSError:
     raise RuntimeError("Spacy model 'en_core_web_md' not found. Please download it first.")
 
 app = FastAPI(title="Generative AI Embedding API", version="1.0")
-app.include_router(cnn_router)                 # <-- ADD (right after app = FastAPI(...))
+app.include_router(cnn_router)
+app.include_router(gan_router)                 # <-- NEW
 
 class TextRequest(BaseModel):
     text: str
